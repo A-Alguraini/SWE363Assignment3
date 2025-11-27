@@ -1,7 +1,7 @@
 ASSIGNMENT 3 – ADVANCED PORTFOLIO (README)
 
-Live Demo: https://a-alguraini.github.io/assignment-2/
-Repository: https://github.com/A-Alguraini/assignment-2
+Live Demo: https://a-alguraini.github.io/SWE363Assignment3/ (enable Pages on main)
+Repository: https://github.com/A-Alguraini/SWE363Assignment3
 
 Overview
 A single‑page, fully static portfolio (HTML, CSS, vanilla JS) with three sections—About, Projects, and Contact. This iteration layers on assignment‑3 requirements: visitor state is persisted (name, theme, pinned cards), the Projects view adds multi‑step logic (difficulty filter + tag chips + search + pinned toggle), a GitHub API feed loads lazily, and the UI introduces a session timer plus performance tweaks (content‑visibility, deferred API fetches).
@@ -74,8 +74,8 @@ Tested manually on: Chrome, Edge, Firefox (desktop), iOS Safari, Android Chrome.
 Deployment (GitHub Pages)
 1) Repo → Settings → Pages.
 2) Source: Deploy from a branch; Branch: main; Folder: / (root); Save.
-3) Your site URL: https://a-alguraini.github.io/assignment-2/
-4) Add the URL to the “Live Demo” line above.
+3) Your site URL: https://a-alguraini.github.io/SWE363Assignment3/
+4) Confirm deployment completes, then verify the Live Demo link above.
 
 AI Summary
 Documented in `docs/ai-usage-report.md`. Highlights: prompt‑driven brainstorming for the GitHub feed structure, pinning logic, and README outline, followed by manual refactors for accessibility and performance.
