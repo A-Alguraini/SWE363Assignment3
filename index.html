@@ -16,6 +16,10 @@
       <button class="tab" data-tab="contact" role="tab" aria-selected="false">Contact</button>
     </nav>
     <div class="actions">
+      <div class="timer" aria-live="polite" aria-label="Time on page">
+        <span>Time here:</span>
+        <strong id="sessionTimer">00:00</strong>
+      </div>
       <button id="themeToggle" class="btn" aria-label="Toggle theme">🌓</button>
     </div>
   </header>
@@ -37,11 +41,22 @@
       <details class="reveal">
         <summary>What’s new in this version?</summary>
         <ul>
-          <li>Dynamic tabs and theme saved in your browser</li>
-          <li>Animated reveal on scroll</li>
-          <li>Contact form with inline validation and toasts</li>
+          <li>Pinned project workflow with difficulty, tag, and search filters</li>
+          <li>Live GitHub feed with lazy loading and manual refresh</li>
+          <li>Personalized greeting, timer, and improved performance defaults</li>
         </ul>
       </details>
+      <div class="card reveal identity-card">
+        <form id="nameForm">
+          <label for="displayName">Tell me how to greet you</label>
+          <div class="name-row">
+            <input id="displayName" name="displayName" placeholder="Enter a nickname" minlength="2" required />
+            <button class="btn" type="submit">Save</button>
+            <button class="btn-outline" type="button" id="clearName">Clear</button>
+          </div>
+          <small id="nameStatus" class="muted" aria-live="polite"></small>
+        </form>
+      </div>
     </section>
 
     <section id="projects" class="panel" role="tabpanel" aria-hidden="true">
@@ -51,18 +66,32 @@
           <option value="title">Sort by Title (A–Z)</option>
           <option value="date">Sort by Date (Newest)</option>
         </select>
+        <select id="difficultySelect" aria-label="Filter by difficulty">
+          <option value="any">All difficulty levels</option>
+          <option value="beginner">Beginner friendly</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
         <div id="tagFilters" class="chips" aria-label="Filter by tag"></div>
-        <button id="reloadBtn" class="btn-outline">Reload Data</button>
+        <div class="control-pair">
+          <button id="reloadBtn" class="btn-outline" type="button">Reload Data</button>
+          <button id="pinnedToggle" class="btn-outline" type="button" aria-pressed="false">Show pinned only</button>
+        </div>
       </div>
 
       <div id="status" class="status" role="status" aria-live="polite"></div>
+      <div id="projectStats" class="stats" aria-live="polite"></div>
       <ul id="projectList" class="grid"></ul>
       <template id="projectItemTemplate">
         <li class="card reveal">
+          <button class="pin" type="button" aria-pressed="false" title="Pin project">☆</button>
           <img class="thumb" alt="" loading="lazy" width="800" height="450" style="display:none; width:100%; height:auto; border-radius:10px; margin-bottom:8px;" />
           <div class="card-head">
             <h3 class="title"></h3>
             <span class="date"></span>
+          </div>
+          <div class="meta">
+            <span class="difficulty"></span>
           </div>
           <p class="summary"></p>
           <div class="tags"></div>
@@ -72,6 +101,32 @@
           </div>
         </li>
       </template>
+
+      <section id="githubFeed" class="feed reveal" aria-labelledby="githubHeading">
+        <header class="feed-head">
+          <div>
+            <h2 id="githubHeading">Live GitHub Feed</h2>
+            <p class="muted">Latest public repositories from GitHub</p>
+          </div>
+          <button id="githubRefresh" class="btn-outline" type="button">Refresh</button>
+        </header>
+        <div id="githubStatus" class="status" role="status" aria-live="polite"></div>
+        <ul id="githubList" class="feed-list"></ul>
+        <template id="repoTemplate">
+          <li class="feed-card">
+            <div class="feed-row">
+              <strong class="repo-name"></strong>
+              <span class="repo-stars"></span>
+            </div>
+            <p class="repo-desc"></p>
+            <div class="feed-row">
+              <span class="repo-lang"></span>
+              <span class="repo-updated"></span>
+            </div>
+            <a class="repo-link" target="_blank" rel="noopener">View on GitHub</a>
+          </li>
+        </template>
+      </section>
     </section>
 
     <section id="contact" class="panel" role="tabpanel" aria-hidden="true">

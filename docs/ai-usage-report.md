@@ -3,35 +3,36 @@
 # AI Usage Report
 
 ## Tools Used
-- ChatGPT: brainstorming UI flows, drafting code scaffolds (tabs, reveal, form validation), and documentation outlines.
-- VS Code IntelliSense: in-editor completions and quick fixes.
+- ChatGPT: brainstorming the GitHub feed layout, pinning strategy, difficulty filter UX, and README outline.
+- VS Code IntelliSense: in-editor completions, quick fixes, and CSS property hints.
 
 ## Representative Prompts
-1. “Build a projects page in vanilla JS with a template, search, sort by date/title, tag chips, and accordion details.”
-2. “Show loading, empty, and error states for fetch with a Retry button; announce status with aria-live.”
-3. “Add a dark/light theme toggle persisted in localStorage; include subtle reveal animations.”
+1. “Design a GitHub repos widget that loads on scroll, includes refresh, and summarizes stars/language/updated date.”
+2. “How can I add pin/unpin buttons to cards and persist them in localStorage while keeping the UI accessible?”
+3. “Give me sentence starters for documenting AI usage and performance optimizations in a student README.”
 
 ## Raw Outputs (Short Excerpts)
-- IntersectionObserver reveal snippet.
-- `fetch` with retry button pattern.
-- Minimal form validation logic (name/email/message).
+- Skeleton fetch logic with AbortController for GitHub.
+- Idea for using aria-pressed buttons to represent pinned cards.
+- Outline bullets for AI usage + performance documentation.
 
 ## Your Edits & Rationale
-- **Accessibility**: confirmed `role="status"` + `aria-live="polite"` for announcements; kept strong focus styles and keyboard-friendly chip toggles.
-- **Performance**: added CSS preload, `loading="lazy"`, explicit image dimensions to reduce CLS.
-- **UX Polish**: simplified toasts, tuned error/empty copy, balanced animation duration.
-- **Data Model**: projects extended with `image`/`imageAlt` fields.
+- **API Integration**: rewrote the suggested fetch block to normalize repo data, limit to six entries, and add lazy loading via IntersectionObserver.
+- **State Management**: extended the idea of aria-pressed buttons into a full pinning workflow (Set + persistence + stats).
+- **Performance**: merged AI hints with `content-visibility`/`contain-intrinsic-size` tweaks, added reduced-motion handling, and deferred network calls until necessary.
+- **Docs**: rephrased AI output to match personal tone and included concrete metrics (which filters are active, etc.).
 
 ## Challenges
-- Handling network errors while keeping the UI responsive.
-- Combining query + tag chips + sort without jank.
-- Preventing layout shift with different thumbnail sizes.
+- Respecting GitHub’s anonymous rate limits while ensuring the UI never blocks; solution: lazy fetch + refresh button + friendly states.
+- Keeping multiple filters (search, tags, difficulty, pinned) in sync without redundant renders; solved with a single applyFilters pipeline.
+- Preventing layout shift for dynamically loaded cards; addressed with contain-intrinsic-size and reserved heights.
 
 ## Learning Outcomes
-- Managing small app state in vanilla JS (query, sort, tags, theme).
-- Using IntersectionObserver for performant reveals.
-- Applying ARIA live regions for accessible feedback.
+- Managing richer app state (query, sort, difficulty, pinned set, GitHub status) in vanilla JS.
+- Chaining multiple observers (reveal + feed) without hurting performance.
+- Documenting AI usage with enough specificity to show understanding and edits.
 
 ## Innovation
-- JSON-driven gallery with optional thumbnails.
-- Unified toast/status pattern for Projects and Contact.
+- Pin-first workflow with live stats and persistence.
+- GitHub feed that feels native to the portfolio (lazy loading, refresh, aria-live messaging).
+- Visitor personalization via stored greeting + live session timer.
